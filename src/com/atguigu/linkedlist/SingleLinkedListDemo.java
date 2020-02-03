@@ -40,7 +40,7 @@ class SingleLinkedList{
 			if (temp.next == null) {
 				break;
 			}
-			//如果没有找到最后, 将将temp后移
+			//如果没有找到最后, 将temp后移
 			temp = temp.next;
 		}
 		//将最后这个节点的next 指向 新的节点
