@@ -21,6 +21,12 @@ public class SingleLinkedListDemo2 {
 		singleLinkedList.addByOrder(hero3);
 		
 		singleLinkedList.list();
+		
+		//测试修改节点的代码
+		HeroNode2 newHeroNode = new HeroNode2(2, "小卢", "玉麒麟~~");
+		singleLinkedList.update(newHeroNode);
+		System.out.println("修改后的链表情况~~");
+		singleLinkedList.list();
 	}
 }
 
@@ -57,6 +63,34 @@ class SingleLinkedList2{
 		}
 	}
 	
+	//修改节点的信息, 根据no编号来修改，即no编号不能改.
+	public void update(HeroNode2 newHeroNode) {
+		if (head.next == null) {
+			System.out.println("链表为空~");
+			return;
+		}
+		//找到需要修改的节点, 根据no编号
+		//定义一个辅助变量
+		HeroNode2 temp = head.next;
+		boolean flag = false;
+		while (true) {
+			if (temp == null) {
+				break;
+			}
+			if (temp.no == newHeroNode.no) {
+				flag = true;
+				break;
+			}
+			temp = temp.next;
+		}
+		if (flag) {
+			temp.name = newHeroNode.name;
+			temp.nickname = newHeroNode.nickname;
+		}else {
+			System.out.printf("没有找到 编号 %d 的节点，不能修改\n", newHeroNode.no);
+		}
+	}
+
 	//显示链表[遍历]
 	public void list() {
 		if (head.next == null) {
