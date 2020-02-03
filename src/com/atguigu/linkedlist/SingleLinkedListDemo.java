@@ -5,7 +5,7 @@ package com.atguigu.linkedlist;
  * @author liZongXiao
  * @version
  * @date 2020年2月2日下午5:59:54
- * 单链表（当不考虑编号顺序时）
+ * 单链表节点的插入（当不考虑编号顺序时）
  */
 public class SingleLinkedListDemo {
 	public static void main(String[] args) {

@@ -5,7 +5,9 @@ package com.atguigu.linkedlist;
  * @author liZongXiao
  * @version
  * @date 2020年2月3日下午3:51:06
- * 单链表（考虑编号顺序时）
+ * 单链表节点的插入（考虑编号顺序时）
+ * 单链表节点的修改
+ * 单链表节点的删除
  */
 public class SingleLinkedListDemo2 {
 	public static void main(String[] args) {
@@ -14,18 +16,24 @@ public class SingleLinkedListDemo2 {
 		HeroNode2 hero3 = new HeroNode2(3, "吴用", "智多星");
 		HeroNode2 hero4 = new HeroNode2(4, "林冲", "豹子头");
 		
+		//插入
 		SingleLinkedList2 singleLinkedList = new SingleLinkedList2();
 		singleLinkedList.addByOrder(hero1);
 		singleLinkedList.addByOrder(hero4);
 		singleLinkedList.addByOrder(hero2);
 		singleLinkedList.addByOrder(hero3);
-		
 		singleLinkedList.list();
 		
-		//测试修改节点的代码
+		//修改
 		HeroNode2 newHeroNode = new HeroNode2(2, "小卢", "玉麒麟~~");
 		singleLinkedList.update(newHeroNode);
 		System.out.println("修改后的链表情况~~");
+		singleLinkedList.list();
+		
+		//删除
+		singleLinkedList.del(3);
+		singleLinkedList.del(1);
+		System.out.println("删除后的链表情况~~");
 		singleLinkedList.list();
 	}
 }
@@ -35,7 +43,7 @@ class SingleLinkedList2{
 	//先初始化一个头节点, 头节点不要动, 不存放具体的数据
 	HeroNode2 head = new HeroNode2(0, "", "");
 	
-	//第二种方式在添加英雄时，根据排名将英雄插入到指定位置
+	//第二种方式在添加英雄时，根据排名将HeroNode插入到指定位置
 	//(如果有这个排名，则添加失败，并给出提示)
 	public void addByOrder(HeroNode2 heroNode) {
 		//因为头节点不能动，因此我们仍然通过一个辅助指针(变量)来帮助找到添加的位置
@@ -91,6 +99,27 @@ class SingleLinkedList2{
 		}
 	}
 
+	//删除节点
+	public void del(int no) {
+		HeroNode2 temp = head;
+		boolean flag = false;
+		while (true) {
+			if (temp.next == null) {
+				break;
+			}
+			if (temp.next.no == no) {
+				flag = true;
+				break;
+			}
+			temp = temp.next;
+		}
+		if (flag) {
+			temp.next = temp.next.next;
+		}else {
+			System.out.printf("要删除的 %d 节点不存在\n", no);
+		}
+	}
+	
 	//显示链表[遍历]
 	public void list() {
 		if (head.next == null) {
