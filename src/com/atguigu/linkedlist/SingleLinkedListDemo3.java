@@ -1,4 +1,7 @@
 package com.atguigu.linkedlist;
+
+import java.util.Stack;
+
 /**
  * 
  * @Description
@@ -8,6 +11,7 @@ package com.atguigu.linkedlist;
  * 求单链表中有效节点的个数
  * 查找单链表中的倒数第k个结点 【新浪面试题】
  * 单链表反转【腾讯面试题】
+ * 从尾到头打印单链表 【百度面试题】
  */
 public class SingleLinkedListDemo3 {
 	public static void main(String[] args) {
@@ -43,9 +47,14 @@ public class SingleLinkedListDemo3 {
 		System.out.println("res=" + findLastIndexNode(singleLinkedList.getHead(), 1));
 		
 		//测试：单链表反转【腾讯面试题】
+		System.out.println("反转单链表~~");
 		reversetList(singleLinkedList.getHead());
 		singleLinkedList.list();
 		
+		//测试：从尾到头打印单链表 【百度面试题】
+		System.out.println("测试逆序打印单链表, 没有改变链表的结构~~");
+		reversePrint(singleLinkedList.getHead());
+		singleLinkedList.list();
 	}
 	
 	//查找单链表中的倒数第k个结点 【新浪面试题】
@@ -81,6 +90,24 @@ public class SingleLinkedListDemo3 {
 		}
 		//将head.next 指向 reverseHead.next , 实现单链表的反转
 		head.next = reverseHead.next;
+	}
+	
+	//从尾到头打印单链表 【百度面试题】，然后利用栈的先进后出的特点，就实现了逆序打印的效果
+	public static void reversePrint(HeroNode3 head) {
+		if (head.next == null) {
+			return ;
+		}
+		Stack<HeroNode3> stack = new Stack<HeroNode3>();
+		HeroNode3 cur = head.next;
+		//将链表的所有节点压入栈
+		while (cur != null) {
+			stack.push(cur);
+			cur = cur.next;
+		}
+		//将栈中的节点进行打印,pop 出栈
+		while (stack.size() > 0) {
+			System.out.println(stack.pop());//stack的特点是先进后出
+		}
 	}
 	
 	//方法：求单链表中有效节点的个数(如果是带头结点的链表，需求不统计头节点)
