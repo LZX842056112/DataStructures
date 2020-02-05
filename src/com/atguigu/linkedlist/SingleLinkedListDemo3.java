@@ -7,6 +7,7 @@ package com.atguigu.linkedlist;
  * @date 2020年2月4日下午1:11:57
  * 求单链表中有效节点的个数
  * 查找单链表中的倒数第k个结点 【新浪面试题】
+ * 单链表反转【腾讯面试题】
  */
 public class SingleLinkedListDemo3 {
 	public static void main(String[] args) {
@@ -39,7 +40,12 @@ public class SingleLinkedListDemo3 {
 		System.out.println("有效的节点个数=" + getLength(singleLinkedList.getHead()));
 		
 		//测试：查找单链表中的倒数第k个结点 【新浪面试题】
-		System.out.println("" + findLastIndexNode(singleLinkedList.getHead(), 1));
+		System.out.println("res=" + findLastIndexNode(singleLinkedList.getHead(), 1));
+		
+		//测试：单链表反转【腾讯面试题】
+		reversetList(singleLinkedList.getHead());
+		singleLinkedList.list();
+		
 	}
 	
 	//查找单链表中的倒数第k个结点 【新浪面试题】
@@ -56,6 +62,25 @@ public class SingleLinkedListDemo3 {
 			cur = cur.next;
 		}
 		return cur;
+	}
+	
+	//单链表反转【腾讯面试题】
+	public static void reversetList(HeroNode3 head) {
+		if (head.next == null || head.next.next == null) {
+			return ;
+		}
+		HeroNode3 cur = head.next;
+		HeroNode3 next = null;// 指向当前节点[cur]的下一个节点
+		HeroNode3 reverseHead = new HeroNode3(0, "", "");
+		//遍历原来的链表，每遍历一个节点，就将其取出，并放在新的链表reverseHead 的最前端
+		while (cur != null) {
+			next = cur.next;
+			cur.next = reverseHead.next;//将cur的下一个节点指向新的链表的最前端
+			reverseHead.next = cur;//将cur 连接到新的链表上
+			cur = next;
+		}
+		//将head.next 指向 reverseHead.next , 实现单链表的反转
+		head.next = reverseHead.next;
 	}
 	
 	//方法：求单链表中有效节点的个数(如果是带头结点的链表，需求不统计头节点)
