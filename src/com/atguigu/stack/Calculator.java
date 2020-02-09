@@ -10,7 +10,7 @@ package com.atguigu.stack;
 public class Calculator {
 	
 	public static void main(String[] args) {
-		String expression = "7*2*2-5+1*5+3-4";
+		String expression = "7*2*2-5+10*5+3-4";
 		//创建两个栈，数栈，一个符号栈
 		ArrayStack2 numStack = new ArrayStack2(10);
 		ArrayStack2 operStack = new ArrayStack2(10);
