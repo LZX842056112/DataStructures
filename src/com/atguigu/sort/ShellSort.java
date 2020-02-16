@@ -21,8 +21,8 @@ public class ShellSort {
 //		System.out.println("排序前");
 //		System.out.println(Arrays.toString(arr));
 		
-		int[] arr = new int[80000];
-		for (int i = 0; i < 80000; i++) {
+		int[] arr = new int[8000000];
+		for (int i = 0; i < 8000000; i++) {
 			arr[i] = (int) (Math.random() * 8000000); // 生成一个[0, 8000000) 数
 		}
 
