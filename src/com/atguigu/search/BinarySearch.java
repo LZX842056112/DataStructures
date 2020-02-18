@@ -15,12 +15,12 @@ import java.util.List;
 public class BinarySearch {
 	
 	public static void main(String[] args) {
-//		int arr[] = { 1, 8, 10, 89,1000,1000, 1234 };
+		int arr[] = { 1, 8, 10, 89,1000,1000, 1234 };
 //		int resIndex = binarySearch(arr, 0, arr.length - 1, 1000);
 //		System.out.println("resIndex=" + resIndex);
 		
-		int arr[] = {1,2,3,4,5,6,7,8,9,10,10,10,11,12,13,14,15,16,17,18,19,20};
-		List<Integer> resIndexList = binarySearch2(arr, 0, arr.length - 1, 10);
+//		int arr[] = {1,2,3,4,5,6,7,8,9,10,10,10,11,12,13,14,15,16,17,18,19,20};
+		List<Integer> resIndexList = binarySearch2(arr, 0, arr.length - 1,1234);
 		System.out.println("resIndexList=" + resIndexList);
 	}
 	
@@ -49,8 +49,11 @@ public class BinarySearch {
 		}
 	}
 	
+	static int count = 0;
 	//有多个相同的数值时，将所有的数值都查找到
 	public static List<Integer> binarySearch2(int[] arr, int left, int right, int findVal) {
+		System.out.println("二分查找次数~~");
+		count++;
 		// 当 left > right 时，说明递归整个数组，但是没有找到
 		if (left > right) {
 			return new ArrayList<Integer>();
@@ -85,6 +88,7 @@ public class BinarySearch {
 				resIndexlist.add(temp);
 				temp += 1;
 			}
+			System.out.println(count);
 			return resIndexlist;
 		}
 	}
