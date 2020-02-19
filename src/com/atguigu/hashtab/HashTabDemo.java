@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * @Description
- * @author lizongxiao
+ * @author liZongXiao
  * @version
  * @date 2020年2月19日下午4:32:40
  * 哈希表管理雇员信息系统
