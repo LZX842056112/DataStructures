@@ -7,6 +7,7 @@ package com.atguigu.tree;
  * 二叉树
  * 1.前序中序后序遍历
  * 2.前序中序后序遍历查找
+ * 3.删除结点
  */
 public class BinaryTreeDemo {
 	public static void main(String[] args) {
@@ -35,6 +36,7 @@ public class BinaryTreeDemo {
 		binaryTree.postOrder(); // 2,5,4,3,1
 	*/
 		//前序中序后序遍历查找测试
+	/*
 		System.out.println("前序遍历方式~~~");//4
 		HeroNode resNode1 = binaryTree.preOrderSearch(5);
 		if (resNode1 != null) {
@@ -56,7 +58,14 @@ public class BinaryTreeDemo {
 		}else {
 			System.out.printf("没有找到 no = %d 的英雄", 5);
 		}
-		
+	*/
+		//测试删除结点
+		System.out.println("删除前,前序遍历");
+		binaryTree.preOrder();
+//		binaryTree.delNode(3);//1,2
+		binaryTree.delNode(5);//1,2,3,4
+		System.out.println("删除后，前序遍历");
+		binaryTree.preOrder();
 	}
 }
 
@@ -119,6 +128,20 @@ class BinaryTree {
 			return this.root.postOrderSearch(no);
 		}else {
 			return null;
+		}
+	}
+	
+	//删除结点
+	public void delNode(int no) {
+		if (root != null) {
+			//如果只有一个root结点, 这里立即判断root是不是就是要删除结点
+			if(root.getNo() == no) {
+				root = null;
+			} else {
+				root.delNode(no);
+			}
+		}else {
+			System.out.println("空树，不能删除~");
 		}
 	}
 }
@@ -266,4 +289,25 @@ class HeroNode {
 		return resNode;
 	}
 	
+	//递归删除结点
+	//1.如果删除的节点是叶子节点，则删除该节点
+	//2.如果删除的节点是非叶子节点，则删除该子树
+	public void delNode(int no) {
+		//如果当前结点的左子结点不为空，并且左子结点 就是要删除结点，就将this.left = null; 并且就返回(结束递归删除)
+		if (this.left != null && this.left.no == no) {
+			this.left = null;
+			return;
+		}
+		if (this.right != null && this.right.no == no) {
+			this.right = null;
+			return;
+		}
+		//需要向左子树进行递归删除
+		if (this.left != null) {
+			this.left.delNode(no);
+		}
+		if (this.right != null) {
+			this.right.delNode(no);
+		}
+	}
 }
