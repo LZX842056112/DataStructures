@@ -41,13 +41,13 @@ public class HuffmanCode {
 		System.out.println("原来的字符串=" + new String(sourceBytes)); // "i like like like java do you like a java"
 	*/		
 		//测试压缩文件
-		String srcFile = "F://Uninstall.jpg";
+		String srcFile = "F://Uninstall.bmp";
 		String dstFile = "F://Uninstall.zip";
 		zipFile(srcFile, dstFile);
 		System.out.println("压缩文件ok~~");
 		//测试解压文件
 		String zipFile = "F://Uninstall.zip";
-		String dstFile1 = "F://Uninstall.jpg";
+		String dstFile1 = "F://Uninstall2.bmp";
 		unZipFile(zipFile, dstFile1);
 		System.out.println("解压成功!");
 	
