@@ -9,11 +9,14 @@ import java.util.Arrays;
  * @version
  * @date 2020年2月26日下午5:07:30
  * 图的创建
+ * 图的深度优先遍历(BFS)
  */
 public class Graph {
 	private ArrayList<String> vertexList; //存储顶点集合
 	private int[][] edges; //存储图对应的邻结矩阵
 	private int numOfEdges; //表示边的数目
+	//定义给数组boolean[], 记录某个结点是否被访问
+	private boolean[] isVisited;
 	
 	public static void main(String[] args) {
 		int n = 5;
@@ -36,6 +39,9 @@ public class Graph {
 		//显示邻结矩阵
 		graph.showGraph();
 		
+		System.out.println("深度遍历");
+		graph.dfs(); // A->B->C->D->E [1->2->4->8->5->3->6->7]
+		
 	}
 	
 	//构造器
@@ -54,7 +60,6 @@ public class Graph {
 	
 	//添加边
 	/**
-	 * 
 	 * @param v1 表示点的下标即使第几个顶点  "A"-"B" "A"->0 "B"->1
 	 * @param v2 第二个顶点对应的下标
 	 * @param weight 表示 
@@ -90,5 +95,58 @@ public class Graph {
 	//返回v1和v2的权值
 	public int getWeight(int v1, int v2) {
 		return edges[v1][v2];
+	}
+	
+	//得到第一个邻接结点的下标 w 
+	/**
+	 * @param index 
+	 * @return 如果存在就返回对应的下标，否则返回-1
+	 */
+	public int getFirstNeighbor(int index) {
+		for (int j = 0; j < vertexList.size(); j++) {
+			if (edges[index][j] > 0) {
+				return j;
+			}
+		}
+		return -1;
+	}
+	
+	//根据前一个邻接结点的下标来获取下一个邻接结点
+	public int getNextNeighbor(int v1, int v2) {
+		for (int j = v2 + 1; j < vertexList.size(); j++) {
+			if (edges[v1][j] > 0) {
+				return j;
+			}
+		}
+		return -1;
+	}
+	
+	//深度优先遍历算法
+	//i 第一次就是 0
+	private void dfs(boolean[] isVisited, int i) {
+		//首先我们访问该结点,输出
+		System.out.print(getValueByIndex(i) + "->");
+		//将结点设置为已经访问
+		isVisited[i] = true;
+		//查找结点i的第一个邻接结点w
+		int w = getFirstNeighbor(i);
+		while (w != -1) {
+			if (!isVisited[w]) {
+				dfs(isVisited, w);
+			}
+			//如果w结点已经被访问过
+			w = getNextNeighbor(i, w);
+		}
+	}
+	
+	//对dfs 进行一个重载, 遍历我们所有的结点，并进行 dfs
+	public void dfs() {
+		isVisited = new boolean[vertexList.size()];
+		//遍历所有的结点，进行dfs[回溯]
+		for (int i = 0; i < getNumOfVertex(); i++) {
+			if (!isVisited[i]) {
+				dfs(isVisited, i);
+			}
+		}
 	}
 }
